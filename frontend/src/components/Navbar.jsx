@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, matchPath, useLocation } from "react-router-dom";
 import Logo from "../assets/Logo/Logo-Full-Light.png";
 import { NavbarLinks } from "../data/Navbar-option";
@@ -27,6 +27,19 @@ function Navbar() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
+  // const [subLinks, setsubLinks] = useState([]);
+  // useEffect(() => {
+  //   ;(async () => {
+  //     setLoading(true);
+  //     try {
+  //       const res = await apiConnector("GET", categories.CATEGORIES_API);
+  //       setSubLinks(res.data.data);
+  //     } catch (error) {
+  //       console.log("Could not fetch Categories.", error);
+  //     }
+  //     setLoading(false);
+  //   })();
+  // }, []);
   return (
     <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-500">
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
