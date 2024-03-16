@@ -42,7 +42,7 @@ const Footer = () => {
                   );
                 })}
               </div>
-              <div className="flex gap-3 text-lg">
+              <div className="flex gap-3 text-lg ">
                 <FaFacebook />
                 <FaGoogle />
                 <FaTwitter />
@@ -169,7 +169,7 @@ const Footer = () => {
           </div>
 
           <div className="text-center">
-            Made with ❤️ CodeHelp © 2023 Studynotion
+            Made with ❤️ © {new Date().getFullYear()} Edu-Tech
           </div>
         </div>
       </div>
