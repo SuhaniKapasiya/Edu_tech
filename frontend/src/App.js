@@ -5,6 +5,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import OpenRoute from "./components/Core/auth/openRoute";
 import ForgotPassword from "./Pages/Forgotpassword";
+import UpadatePassword from "./Pages/updatePassword";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             element={
               <OpenRoute>
                 <ForgotPassword />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="update-password/:id"
+            element={
+              <OpenRoute>
+                <UpadatePassword />
               </OpenRoute>
             }
           />

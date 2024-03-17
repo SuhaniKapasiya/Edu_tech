@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const [emailsend, setEmailsend] = useState(false);
   const [email, setemail] = useState("");
   const { loading } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch(); 
 
   const handleOnSubmit=(e)=>{
     e.preventDefault();
