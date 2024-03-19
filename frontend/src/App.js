@@ -4,8 +4,12 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import Footer from "./components/Footer";
 import OpenRoute from "./components/Core/auth/openRoute";
+import PrivateRoute from "./components/Core/auth/privateRoute";
 import ForgotPassword from "./Pages/Forgotpassword";
 import UpadatePassword from "./Pages/updatePassword";
+import VerifyEmail from "./Pages/VerifyEmail";
+import Error from "./Pages/error404";
+import Home from "./Pages/Home";
 
 function App() {
   return (
@@ -14,7 +18,7 @@ function App() {
         <Navbar />
         <Routes>
           {/* Define your routes here */}
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route
             path="forgot-password"
             element={
@@ -31,6 +35,15 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route
+            path="verify-email/:id"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
+              </OpenRoute>
+            }
+          />
+          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </div>

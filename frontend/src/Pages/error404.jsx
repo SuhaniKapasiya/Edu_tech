@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Error = () => {
+function Error() {
   return (
-    <div className='flex justify-center items-center text-3xl text-white'>
-      Error - 404 Not found
+    <div className="  justify-center gap-y-5 items-center h-[93.9vh] flex flex-col text-richblack-5 w-screen text-3xl ">
+      <div> Error - 404 Not Found</div>
+      <div className=" flex bg-yellow-50 cursor-pointer text-richblack-900 rounded-md text-lg p-3 ">
+        <Link to="/">Go Back Home</Link>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Error
+export default Error;
