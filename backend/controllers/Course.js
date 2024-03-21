@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const Tag = require("../models/tags");
+const Tag = require("../models/Category");
 const User = require("../models/User");
 const {uploadImageToCloudinary} =require("../utils/imageUploader");
 
@@ -67,6 +67,15 @@ exports.createCourse = async(req,res)=>{
 
         //update the Tag ka schema
         //TODO:HW
+         await Tag.findByIdAndUpdate(
+           { _id:tag },
+           {
+             $push: {
+               course: newCourse._id,
+             },
+           },
+           { new: true }
+         );
         
         //return response
         return res.status(200).json({
