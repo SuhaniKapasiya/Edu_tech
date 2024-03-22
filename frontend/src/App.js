@@ -10,6 +10,7 @@ import UpadatePassword from "./Pages/updatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import Error from "./Pages/error404";
 import Home from "./Pages/Home";
+import About from "./Pages/About";
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
             element={
               <OpenRoute>
                 <VerifyEmail />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <OpenRoute>
+                <About />
               </OpenRoute>
             }
           />
