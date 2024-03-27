@@ -5,6 +5,7 @@ const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config(); 
+const mailSender = require("../utils/mailSender");
 
 //sendOTP
 exports.sendOTP = async (req, res) => {
@@ -302,6 +303,19 @@ exports.changePassword = async (req, res) => {
     await user.save();
 
     // Send email confirmation (you can implement this part separately)
+    async function sendVerificationEmail(email, otp) {
+      try {
+        const mailResponse = await mailSender(
+          email,
+          "Password updated successfuly",
+          otp
+        );
+        console.log("Email sent Successfully", mailResponse);
+      } catch (error) {
+        console.log("error occured while Reseting  the password", error);
+        throw error;
+      }
+    }
 
     // Return response
     return res.status(200).json({

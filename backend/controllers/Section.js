@@ -26,16 +26,17 @@ exports.createSection = async (req,res)=>{
                                             },
                                             {new:true},
 
-                                           );
+                                           ).populate('courseContent').exec();
 
      
                                      
         //HW : use populate to replace section/sub-section both in updatedCourseDetails                                    
         //return response
         return res.status(200).json({
-            success:true,
-            message:'Section created successfully',
-        })
+          success: true,
+          message: "Section created successfully",
+          updateCourseDetails,
+        });
 
 
     }catch(error){
@@ -88,6 +89,10 @@ exports.deleteSection = async(req,res)=>{
         // use findByIdAndDelete
         await Section.findByIdAndDelete(sectionId);
         //TODO do we need to delete the entry from the course schema??
+        await Course.updateMany(
+          { courseContent: sectionId },
+          { $pull: { courseContent: sectionId } }
+        );
 
         //return response
         return res.status(200).json({

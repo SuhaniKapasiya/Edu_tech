@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const Profile = require("../models/Profile"); 
+const Course = require("../models/Course");
 
 exports.updateProfile = async (req, res)=>{
     try{
@@ -15,7 +17,7 @@ exports.updateProfile = async (req, res)=>{
         //find profile
         const userDetails = await User.findById(id);
         const profileId = userDetails.additionalDetails;
-        const profileDetails = await profileId.findById(profileId);
+        const profileDetails = await Profile.findById(profileId);
 
         //update profile 
         profileDetails.dateOfBirth = dateOfBirth;

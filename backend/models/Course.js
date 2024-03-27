@@ -2,55 +2,67 @@ const mongoose = require("mongoose");
 
 
 const courseSchema = new mongoose.Schema({
-
-    courseName:{
-         type:String,
-         required:true,
-         trim:true,
+  courseName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  courseDescription: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  instructor: {
+    tupe: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  whatYouWillLearn: {
+    type: String,
+  },
+  courseContent: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Section",
     },
-    courseDescription:{
-        type:String,
-        required:true,
-        trim:true,
+  ],
+  ratingAndReviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "RatingAndReviews",
     },
-    instructor:{
-        tupe:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:true,
+  ],
+  price: {
+    type: Number,
+    required: true,
+  },
+  thumbnail: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  tag: {
+    type: [string],
+    required: true,
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+  },
+  studentsEnrolled: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
-    whatYouWillLearn:{
-        type:String,
-    },
-    courseContent:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Section",
-        }
-    ],
-   ratingAndReviews:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-             ref:"RatingAndReviews"
-        }
-   ],  
-   price:{
-      type:Number,
-      required:true,
-   },
-   thumbnail:{
-      type:String,
-      required:true,
-      trim:true,
-   },
-   tag:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Tag",
-   },
-   studentsEnrolled:[{
-     type:mongoose.Schema.Types.ObjectId,
-     required:true,
-     ref:"User",
-   }]
+  ],
+  instruction: {
+    type: [string],
+  },
+  status:{
+    type:string,
+    enum:["Draft","Published"]
+  }
 
 
 });
