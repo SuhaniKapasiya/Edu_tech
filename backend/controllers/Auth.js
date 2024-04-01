@@ -317,6 +317,8 @@ exports.changePassword = async (req, res) => {
       }
     }
 
+     await sendVerificationEmail(this.email, this.otp);
+
     // Return response
     return res.status(200).json({
       success: true,

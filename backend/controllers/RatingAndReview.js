@@ -9,14 +9,13 @@ exports.createRating = async (req,res)=>{
        //get user Id
        const userId = req.user.id;
        //fetchdata from req body
-       const {rating, review,courseId}= req.body;
+       const {rating, review, courseId}= req.body;
        //check is user is enrolled or not
-       const courseDetails = await Course.findOne(
-                              {_id:courseId,
-                               studentsEnrolled:{$eleMatch:{$:userId}},
-                            } 
-
-       ) 
+       const courseDetails = await Course.findOne({
+         _id: courseId,
+         studentsEnrolled: { $elMatch: { $: userId } },
+         // samne as above line ->studentsEnrolled: userId
+       }); 
        if(!courseDetails){
          return res.status(404).json({
              success:false,
@@ -24,7 +23,7 @@ exports.createRating = async (req,res)=>{
          })
        }
 
-      //check is user already reviewed the course
+      //check if user already reviewed the course
       const alreadyReviewed = await RatingAndReviews.findOne({
                                     user:userId,
                                     Course:courseId,

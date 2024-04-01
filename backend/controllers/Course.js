@@ -9,7 +9,7 @@ exports.createCourse = async (req, res) => {
     const { courseName, courseDescription, whatYouWillLearn, price, Category } =
       req.body;
 
-    //get email
+    //get thumbnail image
     const thumbnail = req.files.thumbnailImage;
 
     //validation
@@ -38,7 +38,7 @@ exports.createCourse = async (req, res) => {
         message: "Instructor Details not found",
       });
     }
-    const CategoryDetails = await Category.findById(tag);
+    const CategoryDetails = await Category.findById(category);
     if (!CategoryDetails) {
       return res.status(404).json({
         success: false,
@@ -74,7 +74,7 @@ exports.createCourse = async (req, res) => {
       { new: true }
     );
 
-    //update the Tag ka schema
+    //update the category ka schema
     //TODO:HW
     await Category.findByIdAndUpdate(
       { _id: Category },

@@ -39,6 +39,7 @@ exports.createSubSection = async (req,res)=>{
         ).populate('SubSection').exec();
         console.log("Updated Section:", updatedSection);
         //HW log updated section here ,after adding populate query
+
         //return res
           return res.status(200).json({
             success:'Sub Section Created Successfully',
@@ -100,7 +101,7 @@ exports.deleteSection = async (req, res) => {
     const { SubsectionId } = req.params;
     // use findByIdAndDelete
     await SubSection.findByIdAndDelete(SubsectionId);
-    //TODO do we need to delete the entry from the Srction schema??
+    //TODO do we need to delete the entry from the Section schema??
      await Section.updateMany(
        { SubSection: SubsectionId },
        { $pull: { SubSection: SubsectionId } }

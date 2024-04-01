@@ -55,7 +55,7 @@ exports.updateSection = async(req,res)=>{
          //data input
     const{sectionName,sectionId} = req.body;
     //data validation
-    if(!sectionName || sectionId){
+    if(!sectionName || !sectionId){
         return res.status(400).json({
             success:false,
             message:'Missing Properties',

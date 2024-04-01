@@ -59,12 +59,14 @@ const courseSchema = new mongoose.Schema({
   instruction: {
     type: [string],
   },
-  status:{
-    type:string,
-    enum:["Draft","Published"]
-  }
-
-
+  status: {
+    type: string,
+    enum: ["Draft", "Published"],
+  },
+  salesCount: {
+    type: Number,
+    default: 0, // Default sales count is 0
+  },
 });
 
 
