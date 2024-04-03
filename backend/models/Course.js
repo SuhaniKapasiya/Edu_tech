@@ -13,7 +13,7 @@ const courseSchema = new mongoose.Schema({
     trim: true,
   },
   instructor: {
-    tupe: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -42,9 +42,10 @@ const courseSchema = new mongoose.Schema({
     trim: true,
   },
   tag: {
-    type: [string],
+    type: [String],
     required: true,
   },
+
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
@@ -57,10 +58,10 @@ const courseSchema = new mongoose.Schema({
     },
   ],
   instruction: {
-    type: [string],
+    type: [String],
   },
   status: {
-    type: string,
+    type: String,
     enum: ["Draft", "Published"],
   },
   salesCount: {

@@ -3,10 +3,13 @@ const Category = require("../models/Category");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
+// Function to create a new course
 exports.createCourse = async (req, res) => {
   try {
+    // Get user ID from request object
+    const userId = req.user.id;
     //fetch data
-    const { courseName, courseDescription, whatYouWillLearn, price, Category } =
+    let { courseName, courseDescription, whatYouWillLearn,tag, price, category,status,instructions } =
       req.body;
 
     //get thumbnail image
@@ -18,7 +21,8 @@ exports.createCourse = async (req, res) => {
       !courseDescription ||
       !whatYouWillLearn ||
       !price ||
-      !Category ||
+      !tag||
+      !category ||
       !thumbnail
     ) {
       res.status(400).json({
@@ -27,10 +31,19 @@ exports.createCourse = async (req, res) => {
       });
     }
     //check for instructor
-    const userId = req.user.id;
-    const instructorDetails = await User.findById(userId);
-    console.log("Instructor Details", instructorDetails);
-    //TODO : verify that userId and instructor._id are same or different?
+    // const userId = req.user.id;
+    // const instructorDetails = await User.findById(userId);
+    // console.log("Instructor Details", instructorDetails);
+    // //TODO : verify that userId and instructor._id are same or different?
+
+    	if (!status || status === undefined) {
+        status = "Draft";
+      }
+      // Check if the user is an instructor
+      const instructorDetails = await User.findById(userId, {
+        accountType: "Instructor",
+      });
+
 
     if (!instructorDetails) {
       return res.status(404).json({
@@ -59,8 +72,11 @@ exports.createCourse = async (req, res) => {
       instructor: instructorDetails.id,
       whatYouWillLearn: whatYouWillLearn,
       price,
+      tag:tag,
       Category: CategoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
+      status:status,
+      instructions:instructions,
     });
 
     //add the new course to the user schema of Instructor
@@ -101,7 +117,7 @@ exports.createCourse = async (req, res) => {
   }
 };
 
-exports.showAllCourse = async (req, res) => {
+exports.getAllCourses = async (req, res) => {
   try {
     const allCourse = await Course.find(
       {},
@@ -164,15 +180,15 @@ exports.getCourseDetails = async (req, res) => {
 
     //return response
     return res.status(200).json({
-      success:true,
-      message:"Course Details fetched successfully",
-      data:courseDetails,
-    })
+      success: true,
+      message: "Course Details fetched successfully",
+      data: courseDetails,
+    });
   } catch (error) {
-     console.log(error);
-     return res.status(500).json({
-      success:false,
-      message:error.message,
-     })
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
