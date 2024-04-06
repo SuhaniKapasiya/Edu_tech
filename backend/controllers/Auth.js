@@ -27,7 +27,7 @@ exports.sendOTP = async (req, res) => {
     }
     //generate Otp
     var otp = otpGenerator.generate(6, {
-      uperCaseAlphabets: false,
+      upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
       specialChars: false,
     });
@@ -40,8 +40,8 @@ exports.sendOTP = async (req, res) => {
     console.log("Result", result);
 
     while (result) {
-      opt = otpGenerator.generate(6, {
-        uperCaseAlphabets: false,
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
         lowerCaseAlphabets: false,
         specialChars: false,
       });
@@ -121,15 +121,23 @@ exports.signup = async(req,res)=>{
       }
 
       //find most recent OTP stored for the user
-      const recentOtp = await OTP.find({ email })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      console.log(recentOtp);
+    const recentOtp = await OTP.find({ email })
+    .sort({ createdAt: -1 })
+    .limit(1)
+    .catch((error) => {
+      console.error("Error fetching recent OTP:", error);
+      return []; // Return an empty array if there's an error
+    });
+
+    console.log("recentOtp", recentOtp);
+
 
       //validate OTP
       if (recentOtp.length == 0) {
+          console.log("recentOtp res", recentOtp);
         //OTP not found
         return res.status(400).json({
+         
           success: false,
           message: " The OTP is not valid",
         });
