@@ -4,7 +4,7 @@ const Course = require("../models/Course");
 
 //create createCategory ka handler functionn
   
-    (exports.createCategory = async (req, res) => {
+exports.createCategory = async (req, res) => {
       try {
         //fetch data
         const { name, description } = req.body;
@@ -35,7 +35,7 @@ const Course = require("../models/Course");
           message: error.message,
         });
       }
-    });
+};
 
 //getAlltags handler function
 exports.showAllCategories = async (req, res) => {

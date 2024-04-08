@@ -86,6 +86,7 @@ exports.signup = async(req,res)=>{
         contactNumber,
         otp,
       } = req.body;
+      console.log("i am req body", req.body)
 
       //validate krlo
       if (
@@ -134,7 +135,7 @@ exports.signup = async(req,res)=>{
 
       //validate OTP
       if (recentOtp.length == 0) {
-          console.log("recentOtp res", recentOtp);
+          console.log("no otp found");
         //OTP not found
         return res.status(400).json({
          

@@ -4,44 +4,45 @@ const Course = require("../models/Course");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 // Method for updating a profile
 
-exports.updateProfile = async (req, res)=>{
-    try{
-      //get data
-      const { dateOfBirth = "", about = "", contactNumber, gender } = req.body;
-      //get UserId
-      const UserId = req.user.id;
-      if (!contactNumber || !gender || !id) {
-        return res.status(400).json({
-          success: false,
-          message: "All fields are requires",
-        });
-      }
-      //find profile by userId
-      const userDetails = await User.findById(UserId);
-      // const profileId = userDetails.additionalDetails;
-      // const profileDetails = await Profile.findById(profileId);
-      const profile = await Profile.findById(userDetails.additionalDetails);
+exports.updateProfile = async (req, res) => {
+  try {
+    //get data
+    const { dateOfBirth = "", about = "", contactNumber } = req.body;
+    //get UserId
+    const UserId = req.user.id;
+    // if (!contactNumber || !gender || !id) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "All fields are requires",
+    //   });
+    // }
+    //find profile by userId
+    const userDetails = await User.findById(UserId);
+    // const profileId = userDetails.additionalDetails;
+    // const profileDetails = await Profile.findById(profileId);
+    const profile = await Profile.findById(userDetails.additionalDetails);
 
-      // Update the profile fields
-      profile.dateOfBirth = dateOfBirth;
-      profile.about = about;
-      profile.contactNumber = contactNumber;
+    // Update the profile fields
+    profile.dateOfBirth = dateOfBirth;
+    profile.about = about;
+    profile.contactNumber = contactNumber;
 
-      // Save the updated profile
-      await profile.save();
+    // Save the updated profile
+    await profile.save();
 
-      return res.status(200).json({
-        success: true,
-        message: "Profile Updated Successfully",
-        profileDetails,
-      });
-    }catch(error){
-        return res.status(500).json({
-            success:false,
-            error:error.message,
-        })
-    }
-}
+    return res.status(200).json({
+      success: true,
+      message: "Profile Updated Successfully",
+      profileDetails,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
 
 
 //deleteAccount
@@ -99,8 +100,9 @@ exports.deleteAccount =async(req,res)=>{
 exports.getAllUserDetails = async (req, res) => {
   try {
     //get id
+    
     const id = req.user.id;
-
+   
     //validation and get user details
 
     const userDetails = await User.findById(id).populate("additionalDetails").exec();

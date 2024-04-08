@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 //resetPasswordToken
 exports.resetPasswordToken = async(req,res)=>{
@@ -13,13 +14,14 @@ exports.resetPasswordToken = async(req,res)=>{
       if (!user) {
         return res.json({
           success: false,
-          message: "Your Email is not registered wiht us",
+          message: `This Email: ${email} is not Registered With Us Enter a Valid Email `,
         });
       }
       //generate token
-      const token = crypto.randomUUID();
+      //const token = crypto.randomUUID();
+      const token = crypto.randomBytes(20).toString("hex");
       //update user by adding tokne and expiration time
-      const updatedDetails = await User.findByIdAndUpdate(
+      const updatedDetails = await User.findOneAndUpdate(
         { email: email },
         {
           token: token,
@@ -64,7 +66,7 @@ exports.resetPassword = async(req,res)=>{
       if (password !== confirmPassword) {
         return res.json({
           success: false,
-          message: "Password not matching",
+          message: "Password and Confirm Password Does not Match",
         });
       }
       //get userdetails from db using token
@@ -78,18 +80,18 @@ exports.resetPassword = async(req,res)=>{
       }
 
       //token time check
-      if (!(userDetails.resetPasswordExpires < Date.now())) {
-        return res.status(403).json({
-          success: false,
-          message: "Token is expired ,please regenerate token",
-        });
-      }
+  if (!(userDetails.resetPasswordExpires > Date.now())) {
+    return res.status(403).json({
+      success: false,
+      message: `Token is Expired, Please Regenerate Your Token`,
+    });
+  }
 
       //has pwd
       const hashedPassword = await bcrypt.hash(password, 10);
 
       //password update
-      await User.findByIdAndUpdate(
+      await User.findOneAndUpdate(
         { token: token },
         { password: hashedPassword },
         { new: true }
@@ -101,7 +103,7 @@ exports.resetPassword = async(req,res)=>{
         message: "Password reset successful",
       });
     } catch (error) {
-      console.log(error);
+      console.log("error inside reset Password",error);
       return res.status(500).json({
         success: false,
         message: "Something went wrong with sending reset pwd email",
