@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { json } = require("express");
 
 exports.auth = async (req, res, next) => {
+         console.log("authh fun middleware");
   try {
     // Extract token
     const token =
@@ -21,7 +22,7 @@ exports.auth = async (req, res, next) => {
 
     // Verify the token
     try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded);
       req.user = decoded;
     } catch (error) {
@@ -44,14 +45,16 @@ exports.auth = async (req, res, next) => {
 //isStudent
 
 exports.isStudent = async (req, res,next)=>{
-    try{
+       console.log(" is Student fun middleware");
+  try{
         if(req.user.accountType !== "Student"){
-            return res.status(401),json({
+            return res.status(401).json({
                 success:false,
                 message:"This is a protected route for student only",
             });
-            next();
+           
         }
+         next();
     }catch(error){
         return res.status(500).json({
             success:false,
@@ -62,17 +65,16 @@ exports.isStudent = async (req, res,next)=>{
 
 //IsInstructor
 exports.IsInstructort = async (req, res, next) => {
+  console.log("Instructor fun middleware");
   try {
     if (req.user.accountType !== "Instructor") {
-      return (
-        res.status(401),
-        json({
-          success: false,
-          message: "This is a protected route for Instructor only",
-        })
-      );
-      next();
+      return res.status(401).json({
+        success: false,
+        message: "This is a protected route for Instructor only",
+      });
     }
+  
+     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -85,24 +87,24 @@ exports.IsInstructort = async (req, res, next) => {
 //isAdmine
 
 exports.isAdmin = async (req, res, next) => {
+       console.log("Instructor fun middleware");
   try {
     if (req.user.accountType !== "Admin") {
-      return (
-        res.status(401),
-        json({
-          success: false,
-          message: "This is a protected route for Admin only",
-        })
-      );
-      next();
+      return res.status(401).json({
+        success: false,
+        message: "This is a protected route for Admin only",
+      });
     }
+   
+    next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified ,please try again",
+      message: "User role cannot be verified, please try again",
     });
   }
 };
+
 
 
 

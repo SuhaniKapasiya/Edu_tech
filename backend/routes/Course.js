@@ -24,7 +24,7 @@ const {
   createSection,
   updateSection,
   deleteSection,
-} = require("../controllers/Section")
+} = require("../controllers/Section");
 
 // Sub-Sections Controllers Import
 const {
@@ -53,7 +53,7 @@ const {
 // ********************************************************************************************************
 
 // Courses can Only be Created by Instructors
-router.post("/createCourse", auth, IsInstructort, createCourse);
+router.post("/createCourse", auth, IsInstructort, createSection);
 //Add a Section to a Course
 router.post("/addSection", auth, IsInstructort, createCourse);
 // Update a Section
