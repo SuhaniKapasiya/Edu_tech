@@ -11,6 +11,8 @@ import VerifyEmail from "./Pages/VerifyEmail";
 import Error from "./Pages/error404";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 function App() {
   return (
@@ -52,6 +54,21 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route
+            path="login"
+            element={
+              <OpenRoute>
+                <Login />
+              </OpenRoute>
+            }
+          /><Route
+          path="signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
