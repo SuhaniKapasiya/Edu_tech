@@ -3,6 +3,8 @@ import { useSelector,useDispatch } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import {Link, useLocation, useNavigate  } from "react-router-dom";
+import { resetPassword } from "../service/operations/authAPI"
+
 
 const UpadatePassword = () => {
   const [formdata, setformdata] = useState({
@@ -13,9 +15,9 @@ const UpadatePassword = () => {
   const { loading } = useSelector((state) => state.auth);
   const [showpassword, setshowpassword] = useState(false);
   const [showconfirmpassword, setconfirmpassword] = useState(false);
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch()
-  // const location = useLocation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const location = useLocation()
   const handleOnChange = (e) => {
     setformdata((prev) => ({
       ...prev,
@@ -24,8 +26,9 @@ const UpadatePassword = () => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    // const token = location.pathname.split("/").at(-1);
-    // dispatch(resetPassword(password, confirmPassword, token, navigate));
+    const token = location.pathname.split("/").at(-1);
+    dispatch(resetPassword(password, confirmPassword, token, navigate));
+    navigate("/login");
   };
 
   return (
