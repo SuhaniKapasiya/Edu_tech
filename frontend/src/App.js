@@ -46,14 +46,7 @@ function App() {
               </OpenRoute>
             }
           />
-          <Route
-            path="about"
-            element={
-              <OpenRoute>
-                <About />
-              </OpenRoute>
-            }
-          />
+          <Route path="about" element={<About />} />
           <Route
             path="login"
             element={
@@ -61,14 +54,15 @@ function App() {
                 <Login />
               </OpenRoute>
             }
-          /><Route
-          path="signup"
-          element={
-            <OpenRoute>
-              <Signup />
-            </OpenRoute>
-          }
-        />
+          />
+          <Route
+            path="signup"
+            element={
+              <OpenRoute>
+                <Signup />
+              </OpenRoute>
+            }
+          />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
