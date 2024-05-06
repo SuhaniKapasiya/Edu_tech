@@ -13,9 +13,9 @@ exports.createSection = async (req, res) => {
       });
     }
     //create section
-    console.log("creating section", req.body);
+   // console.log("creating section", req.body);
     const newSection = await Section.create({sectionName} );
-    console.log("created section");
+    //console.log("created section");
 
     //update course with section ObjectId
     const updateCourseDetails = await Course.findByIdAndUpdate(
@@ -34,9 +34,8 @@ exports.createSection = async (req, res) => {
         },
       })
       .exec();
-
-    //HW : use populate to replace section/sub-section both in updatedCourseDetails
-    //return response
+    console.log("updateCourseDetails", updateCourseDetails);
+  
     return res.status(200).json({
       success: true,
       message: "Section created successfully",
@@ -87,14 +86,15 @@ exports.updateSection = async (req, res) => {
 exports.deleteSection = async (req, res) => {
   try {
     //get ID - assuming that we are sending ID in prams
-    const { sectionId } = req.params;
+    //HW -> req.params se delete karo section
+    const { sectionId } = req.body;
     // use findByIdAndDelete
     await Section.findByIdAndDelete(sectionId);
     //TODO do we need to delete the entry from the course schema??
-    await Course.updateMany(
-      { courseContent: sectionId },
-      { $pull: { courseContent: sectionId } }
-    );
+    // await Course.updateMany(
+    //   { courseContent: sectionId },
+    //   { $pull: { courseContent: sectionId } }
+    // );
 
     //return response
     return res.status(200).json({

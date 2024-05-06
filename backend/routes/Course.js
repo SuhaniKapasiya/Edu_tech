@@ -42,7 +42,7 @@ const {
 // Importing Middlewares
 const {
   auth,
-  IsInstructort,
+  IsInstructor,
   isStudent,
   isAdmin,
 } = require("../middlewares/auth");
@@ -52,19 +52,19 @@ const {
 // ********************************************************************************************************
 
 // Courses can Only be Created by Instructors
-router.post("/createCourse", auth, IsInstructort, createCourse);
+router.post("/createCourse", auth, IsInstructor, createCourse);
 //Add a Section to a Course
-router.post("/addSection", auth, IsInstructort, createSection);
+router.post("/addSection", auth, IsInstructor, createSection);
 // Update a Section
-router.post("/updateSection", auth, IsInstructort, updateSection);
+router.post("/updateSection", auth, IsInstructor, updateSection);
 // Delete a Section
-router.post("/deleteSection", auth, IsInstructort, deleteSection);
+router.post("/deleteSection", auth, IsInstructor, deleteSection);
 // Edit Sub Section
-router.post("/updateSubSection", auth, IsInstructort, updateSubSection);
+router.post("/updateSubSection", auth, IsInstructor, updateSubSection);
 // Delete Sub Section
-router.post("/deleteSubSection", auth, IsInstructort, deleteSubSection);
+router.post("/deleteSubSection", auth, IsInstructor, deleteSubSection);
 // Add a Sub Section to a Section
-router.post("/addSubSection", auth, IsInstructort, createSubSection);
+router.post("/addSubSection", auth, IsInstructor, createSubSection);
 // Get all Registered Courses
 router.get("/getAllCourses", getAllCourses);
 // Get Details for a Specific Courses

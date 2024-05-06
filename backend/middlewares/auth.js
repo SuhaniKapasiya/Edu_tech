@@ -65,7 +65,7 @@ exports.isStudent = async (req, res, next) => {
 };
 
 //IsInstructor
-exports.IsInstructort = async (req, res, next) => {
+exports.IsInstructor = async (req, res, next) => {
   console.log("Instructor fun middleware");
   // console.log("Instructor check middleware");
   console.log("req body isinstructor: ", req.body);
@@ -90,7 +90,7 @@ exports.IsInstructort = async (req, res, next) => {
 
 exports.isAdmin = async (req, res, next) => {
   console.log("admin check middleware");
-  console.log("req body auth: ", req.body);
+  console.log("req body isAdmin: ", req.body);
   try {
     if (req.user.accountType !== "Admin") {
       return res.status(401).json({

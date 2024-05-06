@@ -20,6 +20,7 @@ exports.sendOTP = async (req, res) => {
 
     //if user already exist ,then return a response
     if (checkUserPresent) {
+      // Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
         message: "User already register",
@@ -86,7 +87,7 @@ exports.signup = async(req,res)=>{
         contactNumber,
         otp,
       } = req.body;
-      console.log("i am req body", req.body)
+      console.log("i am req body in signup", req.body)
 
       //validate krlo
       if (
