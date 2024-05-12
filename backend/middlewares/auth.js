@@ -4,6 +4,9 @@ const User = require("../models/User");
 const { json } = require("express");
 
 exports.auth = async (req, res, next) => {
+  console.log("Auth  middleware");
+  // console.log("Instructor check middleware");
+  console.log("req body auth: ", req.body);
   try {
     // Extract token
     const token =
@@ -21,7 +24,7 @@ exports.auth = async (req, res, next) => {
 
     // Verify the token
     try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decoded);
       req.user = decoded;
     } catch (error) {
@@ -43,36 +46,16 @@ exports.auth = async (req, res, next) => {
 
 //isStudent
 
-exports.isStudent = async (req, res,next)=>{
-    try{
-        if(req.user.accountType !== "Student"){
-            return res.status(401),json({
-                success:false,
-                message:"This is a protected route for student only",
-            });
-            next();
-        }
-    }catch(error){
-        return res.status(500).json({
-            success:false,
-            message:'User role cannot be verified ,please try again'
-        })
-    }
-}
-
-//IsInstructor
-exports.IsInstructort = async (req, res, next) => {
+exports.isStudent = async (req, res, next) => {
+  console.log(" is Student fun middleware");
   try {
-    if (req.user.accountType !== "Instructor") {
-      return (
-        res.status(401),
-        json({
-          success: false,
-          message: "This is a protected route for Instructor only",
-        })
-      );
-      next();
+    if (req.user.accountType !== "Student") {
+      return res.status(401).json({
+        success: false,
+        message: "This is a protected route for student only",
+      });
     }
+    next();
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -81,28 +64,46 @@ exports.IsInstructort = async (req, res, next) => {
   }
 };
 
+//IsInstructor
+exports.IsInstructor = async (req, res, next) => {
+  console.log("Instructor fun middleware");
+  // console.log("Instructor check middleware");
+  console.log("req body isinstructor: ", req.body);
+  try {
+    if (req.user.accountType !== "Instructor") {
+      return res.status(401).json({
+        success: false,
+        message: "This is a protected route for Instructor only",
+      });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "User role cannot be verified ,please try again",
+    });
+  }
+};
 
 //isAdmine
 
 exports.isAdmin = async (req, res, next) => {
+  console.log("admin check middleware");
+  console.log("req body isAdmin: ", req.body);
   try {
     if (req.user.accountType !== "Admin") {
-      return (
-        res.status(401),
-        json({
-          success: false,
-          message: "This is a protected route for Admin only",
-        })
-      );
-      next();
+      return res.status(401).json({
+        success: false,
+        message: "This is a protected route for Admin only",
+      });
     }
+
+    next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified ,please try again",
+      message: "User role cannot be verified, please try again",
     });
   }
 };
-
-
-

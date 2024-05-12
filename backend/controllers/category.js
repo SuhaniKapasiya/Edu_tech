@@ -3,38 +3,39 @@ const Category = require("../models/Category");
 const Course = require("../models/Course");
 
 //create createCategory ka handler functionn
-  
+
 exports.createCategory = async (req, res) => {
-      try {
-        //fetch data
-        const { name, description } = req.body;
-        //validation
-        if (!name || !description) {
-          return res.status(400).json({
-            success: false,
-            message: "All fields are required",
-          });
-        }
+  try {
+    console.log("req body in create category: ", req.body);
+    //fetch data
+    const { name, description } = req.body;
+    //validation
+    if (!name || !description) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
 
-        //create entry in db
-        const categoryDetails = await Category.create({
-          name: name,
-          description: description,
-        });
-        console.log(categoryDetails);
+    //create entry in db
+    const categoryDetails = await Category.create({
+      name: name,
+      description: description,
+    });
+    console.log(categoryDetails);
 
-        //return response
+    //return response
 
-        return res.status(200).json({
-          success: true,
-          message: "category Created Successfully",
-        });
-      } catch (error) {
-        return res.status(500).json({
-          success: false,
-          message: error.message,
-        });
-      }
+    return res.status(200).json({
+      success: true,
+      message: "category Created Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 //getAlltags handler function

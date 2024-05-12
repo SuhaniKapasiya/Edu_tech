@@ -1,7 +1,6 @@
-const SubSection =  require("../models/SubSection");
-const Section = require("../models/Section");
 
-// const SubSection = require("../models/SubSection");
+const Section = require("../models/Section");
+const SubSection = require("../models/SubSection");
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
 
 //create SubSection
@@ -26,7 +25,7 @@ exports.createSubSection = async (req,res)=>{
         //create a sub Section
         const subSectionDetails = await SubSection.create({
             title:title,
-            timeDuration:timeDuration,
+            timeDuration:`${uploadDetails.duration}`,
             description:description,
             videoUrl:uploadDetails.secure_url,
         })
@@ -35,18 +34,18 @@ exports.createSubSection = async (req,res)=>{
           { _id: sectionId },
           {
             $push: {
-              SubSection: subSectionDetails._id,
+              subSection: subSectionDetails._id,
             },
           },
           { new: true }
-        ).populate('SubSection').exec();
+        ).populate("subSection");
         console.log("Updated Section:", updatedSection);
         //HW log updated section here ,after adding populate query
 
         //return res
           return res.status(200).json({
             success:'Sub Section Created Successfully',
-            updatedSection,
+             data :updatedSection,
           })
 
     }catch(error){
@@ -101,8 +100,10 @@ exports.createSubSection = async (req,res)=>{
 
   exports.updateSubSection = async (req, res) => {
     try {
-      const { sectionId, title, description } = req.body;
-      const subSection = await SubSection.findById(sectionId);
+      const { sectionId, subSectionId, title, description } = req.body;
+      console.log("updateSubSection mai req ");
+      const subSection = await SubSection.findById(subSectionId);
+      console.log("subSection", subSectionId);
 
       if (!subSection) {
         return res.status(404).json({
@@ -118,8 +119,8 @@ exports.createSubSection = async (req,res)=>{
       if (description !== undefined) {
         subSection.description = description;
       }
-      if (req.files && req.files.video !== undefined) {
-        const video = req.files.video;
+      if (req.files && req.files.videoFile !== undefined) {
+        const video = req.files.videoFile;
         const uploadDetails = await uploadImageToCloudinary(
           video,
           process.env.FOLDER_NAME
@@ -129,10 +130,13 @@ exports.createSubSection = async (req,res)=>{
       }
 
       await subSection.save();
+      const updatedSection = await Section.findById(sectionId).populate(
+            "subSection"
+          );
 
       return res.json({
         success: true,
-        message: "Section updated successfully",
+        message: "Subsection updated successfully",
       });
     } catch (error) {
       console.error(error);
@@ -146,18 +150,36 @@ exports.createSubSection = async (req,res)=>{
 
 exports.deleteSubSection = async (req, res) => {
   try {
-    const { subsectionId, sectionId } = req.body;
-    // use findByIdAndDelete
-    await SubSection.findByIdAndDelete(subsectionId);
-    //TODO do we need to delete the entry from the Section schema??
+    const { sectionId, subSectionId } = req.body;
+     console.log("subsectionId", req.subSectionId);
+     console.log("sectionId", req.sectionId);
     await Section.findByIdAndUpdate(
-      { SubSection: subsectionId },
-      { $pull: { subSection: subsectionId } }
+      { _id: sectionId },
+      {
+        $pull: {
+          subSection: sectionId,
+        },
+      }
+    );
+
+    const subsection = await SubSection.findByIdAndDelete({
+      _id:subSectionId ,
+    });
+    if (!subsection) {
+      return res.status(400).json({
+        success: false,
+        message: "SubSection not found",
+      });
+    }
+
+    const updatedSection = await Section.findById(sectionId).populate(
+      "subSection"
     );
 
     //return response
     return res.status(200).json({
       success: true,
+      data: updatedSection,
       message: "SubSection Deleted Successfully",
     });
   } catch (error) {

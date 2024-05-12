@@ -1,54 +1,54 @@
 const Section = require("../models/Section");
-const Course  = require("../models/Course");
+const Course = require("../models/Course");
 
- 
 exports.createSection = async (req, res) => {
-      try {
-        //data fetch
-        const { sectionName, courseId } = req.body;
-        //data validation
-        if (!sectionName || !courseId) {
-          return res.status(400).json({
-            success: false,
-            message: "Missing Properties",
-          });
-        }
-        //create section
-        const newSection = await Section.create({ sectionName });
+  try {
+    //data fetch
+    const { sectionName, courseId } = req.body;
+    //data validation
+    if (!sectionName || !courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing Properties",
+      });
+    }
+    //create section
+   // console.log("creating section", req.body);
+    const newSection = await Section.create({sectionName} );
+    //console.log("created section");
 
-        //update course with section ObjectId
-        const updateCourseDetails = await Course.findByIdAndUpdate(
-          courseId,
-          {
-            $push: {
-              courseContent: newSection._id,
-            },
-          },
-          { new: true }
-        )
-          .populate({
-            path: "courseContent",
-            populate: {
-              path: "subSection",
-            },
-          })
-          .exec();
-
-        //HW : use populate to replace section/sub-section both in updatedCourseDetails
-        //return response
-        return res.status(200).json({
-          success: true,
-          message: "Section created successfully",
-          updateCourseDetails,
-        });
-      } catch (error) {
-        return res.status(500).json({
-          success: false,
-          message: "Unable to create Section, please try again",
-          error: error.message,
-        });
-      }
-    };
+    //update course with section ObjectId
+    const updateCourseDetails = await Course.findByIdAndUpdate(
+      courseId,
+      {
+        $push: {
+          courseContent: newSection._id,
+        },
+      },
+      { new: true }
+    )
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec();
+    console.log("updateCourseDetails", updateCourseDetails);
+  
+    return res.status(200).json({
+      success: true,
+      message: "Section created successfully",
+      updateCourseDetails,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Unable to create Section, please try again",
+      error: error,
+    });
+  }
+};
 //UPDATE a Section
 exports.updateSection = async (req, res) => {
   try {
@@ -86,14 +86,15 @@ exports.updateSection = async (req, res) => {
 exports.deleteSection = async (req, res) => {
   try {
     //get ID - assuming that we are sending ID in prams
-    const { sectionId } = req.params;
+    //HW -> req.params se delete karo section
+    const { sectionId } = req.body;
     // use findByIdAndDelete
     await Section.findByIdAndDelete(sectionId);
     //TODO do we need to delete the entry from the course schema??
-    await Course.updateMany(
-      { courseContent: sectionId },
-      { $pull: { courseContent: sectionId } }
-    );
+    // await Course.updateMany(
+    //   { courseContent: sectionId },
+    //   { $pull: { courseContent: sectionId } }
+    // );
 
     //return response
     return res.status(200).json({

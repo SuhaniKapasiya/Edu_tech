@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
+import { getPasswordResetToken } from "../service/operations/authAPI"
 const ForgotPassword = () => {
   const [emailsend, setEmailsend] = useState(false);
   const [email, setemail] = useState("");
   const { loading } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch(); 
+  const dispatch = useDispatch(); 
 
   const handleOnSubmit=(e)=>{
     e.preventDefault();
-    // dispatch(getPasswordResetToken(email, setEmailsend))
+    dispatch(getPasswordResetToken(email, setEmailsend))
   }
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">

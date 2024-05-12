@@ -1,6 +1,6 @@
 // Import the required modules
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Import the Controllers
 
@@ -10,7 +10,6 @@ const {
   getAllCourses,
   getCourseDetails,
 } = require("../controllers/Course");
-
 
 // Categories Controllers Import
 const {
@@ -24,26 +23,26 @@ const {
   createSection,
   updateSection,
   deleteSection,
-} = require("../controllers/Section")
+} = require("../controllers/Section");
 
 // Sub-Sections Controllers Import
 const {
   createSubSection,
   updateSubSection,
   deleteSubSection,
-} = require("../controllers/Subsection")
+} = require("../controllers/Subsection");
 
 // Rating Controllers Import
 const {
   createRating,
   getAverageRating,
   getAllRating,
-} = require("../controllers/RatingAndReview")
+} = require("../controllers/RatingAndReview");
 
 // Importing Middlewares
 const {
   auth,
-  IsInstructort,
+  IsInstructor,
   isStudent,
   isAdmin,
 } = require("../middlewares/auth");
@@ -53,23 +52,23 @@ const {
 // ********************************************************************************************************
 
 // Courses can Only be Created by Instructors
-router.post("/createCourse", auth, IsInstructort, createCourse);
+router.post("/createCourse", auth, IsInstructor, createCourse);
 //Add a Section to a Course
-router.post("/addSection", auth, IsInstructort, createCourse);
+router.post("/addSection", auth, IsInstructor, createSection);
 // Update a Section
-router.post("/updateSection", auth, IsInstructort, updateSection);
+router.post("/updateSection", auth, IsInstructor, updateSection);
 // Delete a Section
-router.post("/deleteSection", auth, IsInstructort, deleteSection);
+router.post("/deleteSection", auth, IsInstructor, deleteSection);
 // Edit Sub Section
-router.post("/updateSubSection", auth, IsInstructort, updateSubSection);
+router.post("/updateSubSection", auth, IsInstructor, updateSubSection);
 // Delete Sub Section
-router.post("/deleteSubSection", auth, IsInstructort, deleteSubSection);
+router.post("/deleteSubSection", auth, IsInstructor, deleteSubSection);
 // Add a Sub Section to a Section
-router.post("/addSubSection", auth, IsInstructort, createSubSection);
+router.post("/addSubSection", auth, IsInstructor, createSubSection);
 // Get all Registered Courses
-router.get("/getAllCourses", getAllCourses)
+router.get("/getAllCourses", getAllCourses);
 // Get Details for a Specific Courses
-router.post("/getCourseDetails", getCourseDetails)
+router.post("/getCourseDetails", getCourseDetails);
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)
@@ -77,14 +76,14 @@ router.post("/getCourseDetails", getCourseDetails)
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
 router.post("/createCategory", auth, isAdmin, createCategory);
-router.get("/showAllCategories", showAllCategories)
-router.post("/getCategoryPageDetails", categoryPageDetails)
+router.get("/showAllCategories", showAllCategories);
+router.post("/getCategoryPageDetails", categoryPageDetails);
 
 // ********************************************************************************************************
 //                                      Rating and Review
 // ********************************************************************************************************
-router.post("/createRating", auth, isStudent, createRating)
-router.get("/getAverageRating", getAverageRating)
+router.post("/createRating", auth, isStudent, createRating);
+router.get("/getAverageRating", getAverageRating);
 router.get("/getReviews", getAllRating);
 
-module.exports = router
+module.exports = router;

@@ -47,17 +47,23 @@ exports.updateProfile = async (req, res) => {
 
 //deleteAccount
 //Explore ->how can we schedule this deletion operation
-exports.deleteAccount =async(req,res)=>{
+exports.deleteAccount = async (req, res) => {
   // TODO: Find More on Job Schedule
   // const job = schedule.scheduleJob("10 * * * * *", function () {
   // 	console.log("The answer to life, the universe, and everything!");
   // });
   // console.log(job);
+
+  console.log("req of delete account in profile ", req.user);
   try {
     //get id
     const userId = req.user.id;
+    console.log("printing UserID", userId);
     //validation
-    const userDetails = await User.findById(userId).populate("courses");
+    const userDetails = await User.findById({ _id: userId }).populate(
+      "courses"
+    );
+    console.log("userDetails", userDetails);
     if (!userDetails) {
       return res.status(400).json({
         success: false,
@@ -68,22 +74,22 @@ exports.deleteAccount =async(req,res)=>{
     //TODO :HW unenroll user from all enrlled course
 
     // Extract enrolled courses
-    const enrolledCourses = userDetails.courses;
+    //const enrolledCourses = userDetails.courses;
     // Unenroll user from each course
-    await Promise.all(
-      enrolledCourses.map(async (Course) => {
-        // Remove user from course's enrolled students list
-        await Course.findByIdAndUpdate(Course._id, {
-          $pull: { enrolledStudent: userId },
-        });
-      })
-    );
+    // await Promise.all(
+    //   enrolledCourses.map(async (Course) => {
+    //     // Remove user from course's enrolled students list
+    //     await Course.findByIdAndUpdate(Course._id, {
+    //       $pull: { enrolledStudent: userId },
+    //     });
+    //   })
+    // );
 
     //delete profile
-    await Profile.findByIdAndDelete({ userId: userDetails.additionalDetails });
+    await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
 
     //delete User
-    await User.findByIdAndUpdate({ _id: userId });
+    await User.findByIdAndDelete({ _id: userId });
     // return response
     return res.status(200).json({
       success: true,
@@ -95,7 +101,7 @@ exports.deleteAccount =async(req,res)=>{
       message: "User cannot be deleted successfully",
     });
   }
-}
+};
 
 exports.getAllUserDetails = async (req, res) => {
   try {
