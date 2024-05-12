@@ -58,7 +58,7 @@ responses:
   - text: "The teacher for DSA course is Rajat sir."
 
   utter_ask_unrelated_doubt:
-  - text: " Sorry, I'm still in learning stage"
+  - text: " Sorry, I'm still in learning stage ask me other question related to online courses"
 
   
 
