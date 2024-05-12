@@ -28,3 +28,63 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+
+
+
+- story: User asks about a course doubt
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_course_doubt
+  - action: utter_ask_course_doubt
+
+
+- story: User asks about a webdevelopment course doubt
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_course_doubt_webdevelopment
+  - action: utter_ask_course_doubt_webdevelopment 
+
+
+
+- story: User asks about fee structure
+  steps:
+  
+  - intent: ask_fee_structure
+  - action: utter_ask_fee_structure
+
+
+- story: User asks about webdevelopment fee structure
+  steps:
+  
+  - intent: ask_fee_structure_webdevelopment
+  - action: utter_ask_fee_structure_webdevelopment 
+
+
+
+
+-  story: User asks unrelated question
+   steps:
+
+   - intent: ask_unrelated_doubt
+   - action: utter_ask_unrelated_doubt
+
+
+
+
+- story: User asks about webdevelopment teacher info
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_teacher_info
+  - action: utter_ask_teacher_info
+
+- story: User asks about dsa teacher info
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_teacher_info_dsacourse
+  - action: utter_ask_teacher_info_dsacourse  
+ 

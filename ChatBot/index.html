@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <title>Chatbot Widget</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Import Font Awesome Icon Font-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="
+      crossorigin="anonymous"
+    />
+
+    <!--Import materialize.css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/css/materialize.min.css"
+    />
+
+    <!--Main css-->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <script>
+      //  integration with rasa 
+      const rasaAPI = async (name, msg) => {
+
+          const res = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'charset': 'UTF-8',
+              },
+              credentials: "same-origin",
+              body: JSON.stringify({ "sender": name, "message": msg }),
+          })
+              .then(response => response.json())
+              .then((response) => {
+                  if (response) {
+                      const temp = response[0];
+                      const recipient_id = temp["recipient_id"];
+                      const recipient_msg = temp["text"];
+
+                      const response_temp = { sender: "bot", recipient_id: recipient_id, msg: recipient_msg };
+                      return response_temp
+                  }
+              })
+
+          return res
+      }
+
+      // form submit with and giving response 
+      const handleSubmit = async () => {
+          console.log('clicked');
+          const question = document.getElementById('userInput').value;
+          const res = await rasaAPI('Himanshu', question);
+          console.log(res);
+
+          const node = document.createTextNode(res.sender + ": " + res.msg)
+          console.log(node);
+          const chat = document.createElement('p')
+          chat.appendChild(node) 
+
+          const modalchart = document.getElementById('modal-chart');
+          const node1 = document.createTextNode('Hey! how may i help you')
+          console.log(node);
+
+          modalchart.appendChild(chat);
+      }
+
+
+  </script>
+    
+   
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Modal for rendering the charts, declare this if you want to render charts, 
+         else you remove the modal -->
+      <div id="modal1" class="modal">
+        <canvas id="modal-chart">
+        </canvas>
+      </div>
+
+      <!--chatbot widget -->
+      <div class="widget">
+        <div class="chat_header">
+          <!--Add the name of the bot here -->
+          <span class="chat_header_title">Chat Buddy</span>
+          <span class="dropdown-trigger" href="#" data-target="dropdown1">
+            <i class="material-icons"> more_vert </i>
+          </span>
+
+          <!-- Dropdown menu-->
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#" id="clear">Clear</a></li>
+            <li><a href="#" id="restart">Restart</a></li>
+            <li><a href="#" id="close">Close</a></li>
+          </ul>
+        </div>
+
+
+        <div style="display: flex; flex-direction: column; flex: grow 1; overflow-y: auto;">
+          
+          
+
+          
+  
+          <!-- Chatbot contents goes here -->
+          
+           <div class="chats" id="chats">
+            <div class="clearfix"></div>
+            <img class="botAvatar" src="./static/img/sara_avatar.png">
+            <div class="botMsg">Hey!</div>
+            <br>
+            <br>
+          </div>
+        </div> 
+
+
+        <!--keypad for user to type the message -->
+        <div class="keypad">
+          <textarea
+            id="userInput"
+            
+            class="usrInput"
+            placeholder="Type a message..."
+           
+          ></textarea>
+          <div id="sendButton" onclick="handleSubmit()">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!--bot profile-->
+      <div class="profile_div" id="profile_div">
+        <img class="imgProfile" src="static/img/botAvatar.png" />
+      </div>
+
+      <!-- Bot pop-up intro -->
+      <div class="tap-target" data-target="profile_div">
+        <div class="tap-target-content">
+          <h5 class="white-text">Hey there 👋</h5>
+          <p class="white-text">
+            I can help you get started with me.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/lib/materialize.min.js"
+    ></script>
+    <script src="static/js/lib/uuid.min.js"></script>
+    <!--Main Script -->
+    <script type="text/javascript" src="static/js/script.js"></script>
+
+    <!--Chart.js Script -->
+    <script type="text/javascript" src="static/js/lib/chart.min.js"></script>
+    <script type="text/javascript" src="static/js/lib/showdown.min.js"></script>
+  </body>
+</html>
