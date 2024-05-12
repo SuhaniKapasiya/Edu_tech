@@ -13,6 +13,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
@@ -63,6 +64,40 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
+            {/* <Route path="dashboard/my-profile" element={<MyProfile />} /> */}
+
+            {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
+
+            {/* {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/cart" element={<Cart />} />
+                <Route
+                  path="dashboard/enrolled-courses"
+                  element={<EnrolledCourses />}
+                />
+              </>
+            )} */}
+
+            {/* {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route path="dashboard/instructor" element={<Instructor />} />
+                <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/my-courses" element={<MyCourses />} />
+                <Route
+                  path="dashboard/edit-course/:courseId"
+                  element={<EditCourse />}
+                />
+              </>
+            )} */}
+          </Route>
+
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

@@ -8,7 +8,7 @@ import Logo from "../assets/Logo/Logo-Full-Light.png";
 import { NavbarLinks } from "../data/Navbar-option";
 import { apiConnector } from "../service/apiconnector";
 import { categories } from "../service/apis";
-import { ACCOUNT_TYPE } from "./utils/constants";
+import { ACCOUNT_TYPE } from "../utils/constants";
 import ProfileDropdown from "../components/Core/auth/ProfileDropdown";
 
 function Navbar() {

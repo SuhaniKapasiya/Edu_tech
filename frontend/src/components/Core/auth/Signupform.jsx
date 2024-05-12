@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { sendOtp } from "../../../service/operations/authAPI"
 import { setSignupData } from "../../../Slices/authreducer";
-import { ACCOUNT_TYPE } from "../../utils/constants";
+import { ACCOUNT_TYPE } from "../../../utils/constants";
 import Tab from "../../Tab";
 
 function SignupForm() {
