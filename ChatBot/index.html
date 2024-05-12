@@ -88,7 +88,7 @@
       const handleSubmit = async () => {
           console.log('clicked');
           const question = document.getElementById('userInput').value;
-          const res = await rasaAPI('Himanshu', question);
+          const res = await rasaAPI('Mayank', question);
           console.log(res);
 
           const node = document.createTextNode(res.sender + ": " + res.msg)
