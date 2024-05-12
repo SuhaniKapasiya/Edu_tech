@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react-id-swiper": "^4.0.0",
+    "react-rating-stars-component": "^2.2.0",
+    "swiper": "^11.1.1"
+  }
+}

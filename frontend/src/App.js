@@ -1,9 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Routes, Route,useNavigate  } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Footer from "./components/Footer";
 import OpenRoute from "./components/Core/auth/openRoute";
+import Contact from "./Pages/Contact";
+
 import PrivateRoute from "./components/Core/auth/privateRoute";
 import ForgotPassword from "./Pages/Forgotpassword";
 import UpadatePassword from "./Pages/updatePassword";
@@ -16,6 +19,10 @@ import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
 
 function App() {
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // const { user } = useSelector((state) => state.profile);
   return (
     <Router>
       <div className="w-100vh min-h-screen bg-richblack-900 flex flex-col font-inter overflow-x-hidden">
@@ -64,6 +71,8 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route path="/contact" element={<Contact />} />
+
           <Route
             element={
               <PrivateRoute>
