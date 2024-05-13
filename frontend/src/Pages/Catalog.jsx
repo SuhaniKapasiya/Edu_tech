@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Footer from '../components/common/Footer'
 import { useParams } from 'react-router-dom'
-import { apiConnector } from '../services/apiconnector';
-import { categories } from '../services/apis';
-import { getCatalogaPageData } from '../services/operations/pageAndComponentData';
-import Course_Card from '../components/core/Catalog/Course_Card';
-import CourseSlider from '../components/core/Catalog/CourseSlider';
+import { apiConnector } from '../service/apiconnector';
+import { categories } from '../service/apis';
+import { getCatalogaPageData } from '../service/operations/pageAndComponentData';
+import Course_Card from '../components/Core/Catalog/Course_Card';
+import CourseSlider from '../components/Core/Catalog/CourseSlider';
 import { useSelector } from "react-redux"
-import Error from "./Error"
+import Error from "./error404"
 
 const Catalog = () => {
 
@@ -134,7 +133,6 @@ const Catalog = () => {
             </div>
           </div>
     
-          <Footer />
         </>
       )
     }

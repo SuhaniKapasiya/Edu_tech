@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 
-import { setUser } from "../../slices/profileSlice"
+import { setUser } from "../../Slices/Profileslice"
 import { apiConnector } from "../apiconnector"
 import { settingsEndpoints } from "../apis"
 import { logout } from "./authAPI"
@@ -16,6 +16,8 @@ export function updateDisplayPicture(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {
+      // console.log("hiiiiiiiiiii")
+
       const response = await apiConnector(
         "PUT",
         UPDATE_DISPLAY_PICTURE_API,

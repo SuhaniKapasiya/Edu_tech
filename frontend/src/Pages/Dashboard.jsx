@@ -13,7 +13,7 @@ function Dashboard() {
   return (
     <div className=" flex relative min-h-[calc(100vh-2.5rem)] text-richblack-25 ">
       <Sidebar />
-      <div className="min-h-[100vh] overflow-x-hidden ">
+      <div className="min-h-[100vh]  overflow-x-hidden w-full px-40">
         <div className=" mx-auto py-10 ">
           <Outlet />
         </div>

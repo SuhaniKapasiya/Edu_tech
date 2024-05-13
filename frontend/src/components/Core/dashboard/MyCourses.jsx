@@ -3,8 +3,8 @@ import { VscAdd } from "react-icons/vsc"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { fetchInstructorCourses } from "../../../services/operations/courseDetailsAPI"
-import IconBtn from "../../common/IconBtn"
+import { fetchInstructorCourses } from "../../../service/operations/courseDetailsAPI"
+import IconBtn from "../../IconBtn"
 import CoursesTable from "./InstructorCourses/CoursesTable"
 
 export default function MyCourses() {

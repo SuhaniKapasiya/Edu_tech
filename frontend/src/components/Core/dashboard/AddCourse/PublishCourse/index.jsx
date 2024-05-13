@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { editCourseDetails } from "../../../../../services/operations/courseDetailsAPI"
-import { resetCourseState, setStep } from "../../../../../slices/courseSlice"
+import { editCourseDetails } from "../../../../../service/operations/courseDetailsAPI"
+import { resetCourseState, setStep } from "../../../../../Slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
-import IconBtn from "../../../../common/IconBtn"
+import IconBtn from "../../../../IconBtn"
 
 export default function PublishCourse() {
   const { register, handleSubmit, setValue, getValues } = useForm()

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import IconBtn from "../../../common/IconBtn"
-import { buyCourse } from "../../../../services/operations/studentFeaturesAPI"
+import IconBtn from "../../../IconBtn"
+import { buyCourse } from "../../../../service/operations/studentFeaturesAPI"
 
 export default function RenderTotalAmount() {
   const { total, cart } = useSelector((state) => state.cart)

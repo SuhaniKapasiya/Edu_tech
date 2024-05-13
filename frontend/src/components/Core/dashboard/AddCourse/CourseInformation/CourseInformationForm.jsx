@@ -9,10 +9,10 @@ import {
   addCourseDetails,
   editCourseDetails,
   fetchCourseCategories,
-} from "../../../../../services/operations/courseDetailsAPI"
-import { setCourse, setStep } from "../../../../../slices/courseSlice"
+} from "../../../../../service/operations/courseDetailsAPI"
+import { setCourse, setStep } from "../../../../../Slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
-import IconBtn from "../../../../common/IconBtn"
+import IconBtn from "../../../../IconBtn"
 import Upload from "../Upload"
 import ChipInput from "./ChipInput"
 import RequirementsField from "./RequirementField"

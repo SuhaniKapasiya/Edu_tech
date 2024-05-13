@@ -11,7 +11,9 @@ import "../App.css";
 // Icons
 import { FaStar } from "react-icons/fa";
 // Import required modules
-import {Autoplay, FreeMode, Pagination } from "swiper/modules";
+// Import required modules
+import SwiperCore, { Autoplay, FreeMode, Pagination } from "swiper";
+
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../service/apiconnector";

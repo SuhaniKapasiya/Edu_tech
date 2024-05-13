@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   createSection,
   updateSection,
-} from "../../../../../services/operations/courseDetailsAPI"
+} from "../../../../../service/operations/courseDetailsAPI"
 import {
   setCourse,
   setEditCourse,
   setStep,
-} from "../../../../../slices/courseSlice"
-import IconBtn from "../../../../common/IconBtn"
+} from "../../../../../Slices/courseSlice"
+import IconBtn from "../../../../IconBtn"
 import NestedView from "./NestedView"
 
 export default function CourseBuilderForm() {
@@ -140,6 +140,7 @@ export default function CourseBuilderForm() {
           )}
         </div>
       </form>
+      {console.log("length sjankdkdksnkls",course )}
       {course.courseContent.length > 0 && (
         <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
       )}

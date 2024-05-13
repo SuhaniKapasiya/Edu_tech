@@ -1,12 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Routes, Route,useNavigate  } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Footer from "./components/Footer";
 import OpenRoute from "./components/Core/auth/openRoute";
 import Contact from "./Pages/Contact";
-
+import { ACCOUNT_TYPE } from "./utils/constants";
 import PrivateRoute from "./components/Core/auth/privateRoute";
 import ForgotPassword from "./Pages/Forgotpassword";
 import UpadatePassword from "./Pages/updatePassword";
@@ -17,12 +22,21 @@ import About from "./Pages/About";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
+import Myprofile from "./components/Core/dashboard/MyProfile";
+import Settings from "./components/Core/dashboard/Settings";
+import Cart from "./components/Core/dashboard/Cart/index";
+import EnrolledCourses from "./components/Core/dashboard/EnrolledCourses";
+import Instructor from "./components/Core/dashboard/InstructorDashboard/Instructor"
+import AddCourse from "./components/Core/dashboard/AddCourse";
+import MyCourses from "./components/Core/dashboard/MyCourses";
+import EditCourse from "./components/Core/dashboard/EditCourse";
+import Catalog from "./Pages/Catalog";
 
 function App() {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  // const { user } = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.profile);
   return (
     <Router>
       <div className="w-100vh min-h-screen bg-richblack-900 flex flex-col font-inter overflow-x-hidden">
@@ -30,6 +44,8 @@ function App() {
         <Routes>
           {/* Define your routes here */}
           <Route path="/" element={<Home />} />
+          <Route path="catalog/:catalogName" element={<Catalog/>} />
+      {/* <Route path="courses/:courseId" element={<CourseDetails/>} /> */}
           <Route
             path="forgot-password"
             element={
@@ -80,11 +96,11 @@ function App() {
               </PrivateRoute>
             }
           >
-            {/* <Route path="dashboard/my-profile" element={<MyProfile />} /> */}
+            <Route path="dashboard/my-profile" element={<Myprofile />} />
 
-            {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
+            <Route path="dashboard/Settings" element={<Settings />} />
 
-            {/* {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
                 <Route path="dashboard/cart" element={<Cart />} />
                 <Route
@@ -92,9 +108,9 @@ function App() {
                   element={<EnrolledCourses />}
                 />
               </>
-            )} */}
+            )}
 
-            {/* {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
               <>
                 <Route path="dashboard/instructor" element={<Instructor />} />
                 <Route path="dashboard/add-course" element={<AddCourse />} />
@@ -104,7 +120,7 @@ function App() {
                   element={<EditCourse />}
                 />
               </>
-            )} */}
+            )}
           </Route>
 
           <Route path="*" element={<Error />} />
