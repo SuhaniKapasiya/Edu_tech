@@ -82,7 +82,7 @@ function App() {
             </Privateroute>
           }
         >
-          {/*  testing */}
+          
           <Route path="dashboard/my-profile" element={<Myprofile />} />
           <Route path="dashboard/settings" element={<Settings />} />
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
