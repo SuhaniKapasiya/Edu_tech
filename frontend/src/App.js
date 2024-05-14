@@ -70,7 +70,7 @@ function App() {
             </OpenRoute>
           }
         />
-        {/* error route  */}
+       
         <Route path="about" element={<About />} />
         <Route path="/catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
