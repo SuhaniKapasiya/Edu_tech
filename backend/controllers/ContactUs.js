@@ -2,8 +2,7 @@ const ContactUs = require("../models/ContactUs");
 
 exports.contactUs = async (req, res) => {
   try {
-    const { firstName, lastName, email, contactNumber, message } =
-      req.body.data;
+    const { firstName, lastName, email, contactNumber, message } = req.body.data;
     console.log("at backend request - ", req.body);
     if (!firstName || !lastName || !email || !contactNumber || !message) {
       return res

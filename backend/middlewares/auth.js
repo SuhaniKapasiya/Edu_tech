@@ -1,21 +1,20 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const User = require("../models/User");
-const { json } = require("express");
 
+//auth
 exports.auth = async (req, res, next) => {
-  console.log("Auth  middleware");
-  // console.log("Instructor check middleware");
-  console.log("req body auth: ", req.body);
   try {
-    // Extract token
+    //extract token
+    console.log("inside auth");
     const token =
       req.cookies.token ||
       req.body.token ||
-      req.header("Authorization").replace("Bearer ", "");
-       console.log(req.cookies.token)
-       console.log(req.header("Authorization").replace("Bearer ", ""));
-    // If token is missing, return response
+      //req.header("Authorization").replace("Bearer ", "");
+      (req.header("Authorization") || "").replace("Bearer ", "");
+
+    console.log(token);
+    //if token missing, then return response
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -23,53 +22,49 @@ exports.auth = async (req, res, next) => {
       });
     }
 
-    // Verify the token
+    //verify the token
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decoded);
-      req.user = decoded;
-    } catch (error) {
-      // Token verification failed
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      // console.log(decode);
+      req.user = decode;
+    } catch (err) {
+      console.log("JWT Verification Error:", err);
       return res.status(401).json({
         success: false,
         message: "Token is invalid",
       });
     }
-    next(); // Call next middleware or route handler
+
+    next();
   } catch (error) {
-    console.error("Error in auth middleware:", error);
-    return res.status(500).json({
+    console.log("error is : " + error);
+    return res.status(401).json({
       success: false,
-      message: "Something went wrong while validating the token",
+      message: "Something wentt wrong while validating the token",
     });
   }
 };
 
 //isStudent
-
 exports.isStudent = async (req, res, next) => {
-  console.log(" is Student fun middleware");
   try {
     if (req.user.accountType !== "Student") {
       return res.status(401).json({
         success: false,
-        message: "This is a protected route for student only",
+        message: "This is a protected route for Students only",
       });
     }
     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified ,please try again",
+      message: "User role cannot be verified, please try again",
     });
   }
 };
 
-//IsInstructor
-exports.IsInstructor = async (req, res, next) => {
-  console.log("Instructor fun middleware");
-  // console.log("Instructor check middleware");
-  console.log("req body isinstructor: ", req.body);
+//isInstructor
+exports.isInstructor = async (req, res, next) => {
   try {
     if (req.user.accountType !== "Instructor") {
       return res.status(401).json({
@@ -77,29 +72,25 @@ exports.IsInstructor = async (req, res, next) => {
         message: "This is a protected route for Instructor only",
       });
     }
-
     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified ,please try again",
+      message: "User role cannot be verified, please try again",
     });
   }
 };
 
-//isAdmine
-
+//isAdmin
 exports.isAdmin = async (req, res, next) => {
-  console.log("admin check middleware");
-  console.log("req body isAdmin: ", req.body);
   try {
+    console.log("Printing AccountType ", req.user.accountType);
     if (req.user.accountType !== "Admin") {
       return res.status(401).json({
         success: false,
         message: "This is a protected route for Admin only",
       });
     }
-
     next();
   } catch (error) {
     return res.status(500).json({

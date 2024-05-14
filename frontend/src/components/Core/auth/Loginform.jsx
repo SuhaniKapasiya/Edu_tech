@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
-import { login } from "../../../service/operations/authAPI"
+import { login } from "../../../services/operations/authAPI"
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -77,7 +77,7 @@ function LoginForm() {
             <AiOutlineEye fontSize={24} fill="#AFB2BF" />
           )}
         </span>
-        <Link to="/forgot-password">
+        <Link to="/forgotpassword">
           <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
             Forgot Password
           </p>

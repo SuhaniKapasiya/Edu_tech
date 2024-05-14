@@ -1,5 +1,6 @@
-import signupImg from "../assets/Images/signup.webp"
-import Template from "../components/Core/auth/Template"
+import React from "react";
+import signupImg from "../assets/Images/signup.webp";
+import Template from "../Components/Core/auth/Template";
 
 function Signup() {
   return (
@@ -10,7 +11,7 @@ function Signup() {
       image={signupImg}
       formType="signup"
     />
-  )
+  );
 }
 
-export default Signup
+export default Signup;

@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { toast } from "react-hot-toast"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
-import { sendOtp } from "../../../service/operations/authAPI"
-import { setSignupData } from "../../../Slices/authreducer";
-import { ACCOUNT_TYPE } from "../../../utils/constants";
-import Tab from "../../Tab";
+import { sendOtp } from "../../../services/operations/authAPI"
+import { setSignupData } from "../../../slices/authSlice"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
+import Tab from "../../Common/Tab"
 
 function SignupForm() {
   const navigate = useNavigate()

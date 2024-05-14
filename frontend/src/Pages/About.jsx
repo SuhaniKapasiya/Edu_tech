@@ -1,159 +1,221 @@
 import React from "react";
-import Aboutcontactform from "../components/Core/Aboutus/Aboutcontactform";
-import FoundingStory from "../assets/Images/FoundingStory.png";
-import BannerImage1 from "../assets/Images/aboutus1.webp";
-import BannerImage2 from "../assets/Images/aboutus2.webp";
-import BannerImage3 from "../assets/Images/aboutus3.webp";
-import Texthighlighter from "../components/Core/Homepage/Texthighlighter";
-import LearningGrid from "../components/Core/Aboutus/LearningGrid";
-const About = () => {
-  const Stats = [
-    { count: "5K", label: "Active Students" },
-    { count: "10+", label: "Mentors" },
-    { count: "200+", label: "Courses" },
-    { count: "50+", label: "Awards" },
-  ];
+import Highlightedtext from "../Components/Core/homepage/Highlightedtext";
+import img1 from "../assets/Images/aboutus1.webp";
+import img2 from "../assets/Images/aboutus2.webp";
+import img3 from "../assets/Images/aboutus3.webp";
+import Foundingstoryimg from "../assets/Images/FoundingStory.png";
+import Footer from "../Components/Common/Footer";
+import Button from "../Components/Core/homepage/Button";
+import Contactform from "../Components/Core/aboutpage/Contactform";
+
+function About() {
   return (
-    <div>
-      <section className="bg-richblack-700">
-        <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
-          <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
-            Driving Innovation in Online Education for a
-            <Texthighlighter text={"Brighter Future"} />
-            <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
-              Studynotion is at the forefront of driving innovation in online
-              education. We're passionate about creating a brighter future by
-              offering cutting-edge courses, leveraging emerging technologies,
-              and nurturing a vibrant learning community.
-            </p>
-          </header>
-          <div className="sm:h-[70px] lg:h-[150px]"></div>
-          <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
-            <img src={BannerImage1} alt="" />
-            <img src={BannerImage2} alt="" />
-            <img src={BannerImage3} alt="" />
-          </div>
+    <div className=" overflow-x-hidden text-richblack-25 w-[100vw] mx-auto flex flex-col  text-center justify-between  h-[100vh] ">
+      {/* section 1  */}
+      <div className=" w-full flex flex-col h-fit bg-richblack-800 ">
+        <div className="text-md text-richblack-300 mt-20">About Us</div>
+        <div className="font-semibold text-3xl mt-8">
+          Driving Innovation in Online Education for a <br />{" "}
+          <Highlightedtext text="Brighter Future" />{" "}
         </div>
-      </section>
-
-      <section className="border-b border-richblack-700">
-        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
-          <div className="h-[100px] "></div>
-          <div className=" text-xl md:text-4xl font-semibold mx-auto py-5 pb-20 text-center text-white">
-            We are passionate about revolutionizing the way we learn. Our
-            innovative platform <Texthighlighter text={"combines technology"} />
-            ,{" "}
-            <span className="bg-gradient-to-b from-[#FF512F] to-[#F09819] text-transparent bg-clip-text font-bold">
-              {" "}
-              expertise
-            </span>
-            , and community to create an
-            <span className="bg-gradient-to-b from-[#E65C00] to-[#F9D423] text-transparent bg-clip-text font-bold">
-              {" "}
-              unparalleled educational experience.
-            </span>
-          </div>
+        <div className="text-lg text-richblack-300 w-[900px] mx-auto mt-6">
+          Studynotion is at the forefront of driving innovation in online
+          education. We're passionate about creating a brighter future by
+          offering cutting-edge courses, leveraging emerging technologies, and
+          nurturing a vibrant learning community.
         </div>
-      </section>
+        <div className=" flex justify-center gap-x-3 mt-10 ">
+          <img src={img1} className=" object-contain" alt="" />
+          <img src={img2} className=" object-contain" alt="" />
+          <img src={img3} className=" object-contain" alt="" />
+        </div>
+      </div>
 
-      <section>
-        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
-          <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
-            <div className="my-24 flex lg:w-[50%] flex-col gap-10">
-              <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
-                Our Founding Story
-              </h1>
-              <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                Our e-learning platform was born out of a shared vision and
-                passion for transforming education. It all began with a group of
-                educators, technologists, and lifelong learners who recognized
-                the need for accessible, flexible, and high-quality learning
-                opportunities in a rapidly evolving digital world.
-              </p>
-              <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                As experienced educators ourselves, we witnessed firsthand the
-                limitations and challenges of traditional education systems. We
-                believed that education should not be confined to the walls of a
-                classroom or restricted by geographical boundaries. We
-                envisioned a platform that could bridge these gaps and empower
-                individuals from all walks of life to unlock their full
-                potential.
-              </p>
+      {/* section 2 */}
+      <div className=" w-full max-w-[1100px] justify-center mx-auto flex flex-col h-fit bg-richblack-900 ">
+        <div className="font-semibold text-3xl mt-16">
+          "We are passionate about revolutionizing the way we learn. Our
+          innovative platform <Highlightedtext text="combines technology" /> ,{" "}
+          <span className=" text-[#FF512F] ">expertise</span> , and community to
+          create an{" "}
+          <span className=" text-[#F9D423] ">
+            unparalleled educational experience
+          </span>
+          ."
+        </div>
+        <div className=" flex gap-x-72 mt-20 mx-auto justify-start  ">
+          {" "}
+          <div className=" flex flex-col justify-start text-left  ">
+            {" "}
+            <div className="font-semibold text-2xl justify-start text-[#FD1D1D]">
+              Our Founding Story
             </div>
-
-            <div>
-              <img
-                src={FoundingStory}
-                alt=""
-                className="shadow-[0_0_20px_0] shadow-[#FC6767]"
-              />
+            <div className=" mt-6 justify-start text-sm flex ">
+              Our e-learning platform was born out of a shared vision and
+              passion for transforming education. It all began with a group of
+              educators, technologists, and lifelong learners who recognized the
+              need for accessible, flexible, and high-quality learning
+              opportunities in a rapidly evolving digital world.
             </div>
+            <div className="justify-start mt-2 text-sm flex">
+              As experienced educators ourselves, we witnessed firsthand the
+              limitations and challenges of traditional education systems. We
+              believed that education should not be confined to the walls of a
+              classroom or restricted by geographical boundaries. We envisioned
+              a platform that could bridge these gaps and empower individuals
+              from all walks of life to unlock their full potential.
+            </div>{" "}
           </div>
-          <div className="flex flex-col items-center lg:gap-10 lg:flex-row justify-between">
-            <div className="my-24 flex lg:w-[40%] flex-col gap-10">
-              <h1 className="bg-gradient-to-b from-[#FF512F] to-[#F09819] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
+          <img
+            src={Foundingstoryimg}
+            className=" w-[350px]  object-contain "
+            alt=""
+          />{" "}
+        </div>
+        {/* para 3 */}
+        <div>
+          <div className=" flex gap-x-72 mt-20 mx-auto justify-start  ">
+            {" "}
+            <div className=" flex flex-col justify-start text-left  ">
+              {" "}
+              <div className="font-semibold text-2xl justify-start text-[#E65C00]">
                 Our Vision
-              </h1>
-              <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
+              </div>
+              <div className=" mt-6 justify-start text-sm flex ">
                 With this vision in mind, we set out on a journey to create an
                 e-learning platform that would revolutionize the way people
                 learn. Our team of dedicated experts worked tirelessly to
                 develop a robust and intuitive platform that combines
                 cutting-edge technology with engaging content, fostering a
                 dynamic and interactive learning experience.
-              </p>
+              </div>
             </div>
-            <div className="my-24 flex lg:w-[40%] flex-col gap-10">
-              <h1 className="bg-gradient-to-b from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] text-transparent bg-clip-text text-4xl font-semibold lg:w-[70%] ">
+            <div className=" flex flex-col justify-start text-left  ">
+              {" "}
+              <div className="font-semibold text-2xl justify-start text-[#1FA2FF]">
                 Our Mission
-              </h1>
-              <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                Our mission goes beyond just delivering courses online. We
+              </div>
+              <div className=" mt-6 justify-start text-sm flex ">
+                our mission goes beyond just delivering courses online. We
                 wanted to create a vibrant community of learners, where
                 individuals can connect, collaborate, and learn from one
                 another. We believe that knowledge thrives in an environment of
                 sharing and dialogue, and we foster this spirit of collaboration
                 through forums, live sessions, and networking opportunities.
-              </p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      {/* section 3 */}
+      <div className=" w-full  mt-12 py-20 justify-around flex  h-fit bg-richblack-800 ">
+        <div className=" flex flex-col ">
+          <div className=" font-semibold text-richblack-100 text-2xl ">5K</div>
+          <div className=" text-richblack-400 ">Active Students</div>
+        </div>
+        <div className=" flex flex-col ">
+          <div className=" font-semibold text-richblack-100 text-2xl ">10+</div>
+          <div className=" text-richblack-400 ">Mentors</div>
+        </div>
+        <div className=" flex flex-col ">
+          <div className=" font-semibold text-richblack-100 text-2xl ">
+            200+
+          </div>
+          <div className=" text-richblack-400 ">Courses</div>
+        </div>
+        <div className=" flex flex-col ">
+          <div className=" font-semibold text-richblack-100 text-2xl ">50+</div>
+          <div className=" text-richblack-400 ">Awards</div>
+        </div>
+      </div>
 
-      <div className="bg-richblack-700">
-        {/* Stats */}
-        <div className="flex flex-col gap-10 justify-between w-11/12 max-w-maxContent text-white mx-auto ">
-          <div className="grid grid-cols-2 md:grid-cols-4 text-center">
-            {Stats.map((data, index) => {
-              return (
-                <div className="flex flex-col py-10" key={index}>
-                  <h1 className="text-[30px] font-bold text-richblack-5">
-                    {data.count}
-                  </h1>
-                  <h2 className="font-semibold text-[16px] text-richblack-500">
-                    {data.label}
-                  </h2>
-                </div>
-              );
-            })}
+      {/* section 4 */}
+      <div className=" w-full  max-w-[1100px] text-left my-20  flex flex-col  mx-auto  bg-richblack-900 ">
+        <div className=" flex ">
+          <div className=" flex flex-col items-start   ">
+            {/* colourfull vala section */}
+            <div className="font-semibold text-3xl items-start  ">
+              World-Class Learning for <br />
+              <Highlightedtext text="Anyone, Anywhere" />
+            </div>
+            <div className=" text-sm text-richblack-400 mt-4 mb-8 pr-10 ">
+              Studynotion partners with more than 275+ leading universities and
+              companies to bring flexible, affordable, job-relevant online
+              learning to individuals and organizations worldwide.
+            </div>
+            <Button children={"Learn More"} active={1} linkto={"/signup"} />
+          </div>
+          {/* boxes  */}
+          <div className=" flex ">
+            {/* 2 boxes  */}
+            <div className="w-[250px] p-6 bg-richblack-700 ">
+              <div className=" text-richblack-5 font-semibold ">
+                Curriculum Based on Industry Needs
+              </div>
+              <div className=" text-sm mt-4 text-richblack-300 ">
+                Save time and money! The Belajar curriculum is made to be easier
+                to understand and in line with industry needs.
+              </div>
+            </div>
+            <div className="w-[250px] p-6 bg-richblack-800 ">
+              <div className=" text-richblack-5 font-semibold ">
+                Our Learning Methods
+              </div>
+              <div className=" text-sm mt-4 text-richblack-300 ">
+                The learning process uses the namely online and offline.
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* bottom 3 box row  */}
+        <div className=" flex ">
+          {/* boxes  */}
+          <div className=" flex  ">
+            {/* 2 boxes  */}
+            {/* -1 */}
+            <div className="w-[350px] p-6 bg-richblack-900 "></div>
+            {/* 1 */}
+            <div className="w-[250px] p-6 bg-richblack-700 ">
+              <div className=" text-richblack-5 font-semibold ">
+                Curriculum Based on Industry Needs
+              </div>
+
+              <div className=" text-sm mt-4 text-richblack-300 ">
+                Save time and money! The Belajar curriculum is made to be easier
+                to understand and in line with industry needs.
+              </div>
+            </div>
+            {/* 2 */}
+            <div className="w-[250px] p-6 bg-richblack-800 ">
+              <div className=" text-richblack-5 font-semibold ">
+                Curriculum Based on Industry Needs
+              </div>
+
+              <div className=" text-sm mt-4 text-richblack-300 ">
+                Save time and money! The Belajar curriculum is made to be easier
+                to understand and in line with industry needs.
+              </div>
+            </div>
+            {/* 3 */}
+            <div className="w-[250px] p-6 bg-richblack-700 ">
+              <div className=" text-richblack-5 font-semibold ">
+                Our Learning Methods
+              </div>
+              <div className=" text-sm mt-4 text-richblack-300 ">
+                The learning process uses the namely online and offline.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
-        <LearningGrid />
-        <Aboutcontactform />
-      </section>
-
-      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
-        {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
-          Reviews from other learners
-        </h1>
-        {/* <ReviewSlider /> */}
-      </div>
+      {/* section 5 contact form  */}
+      <Contactform />
+      {/* <section> 6 reviews </section> */}
+      <div></div>
+      <Footer />
     </div>
   );
-};
+}
 
 export default About;

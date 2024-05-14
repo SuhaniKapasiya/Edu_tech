@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Core/dashboard/Sidebar";
+import Sidebar from "../Components/Core/dashboard/Sidebar";
 
 function Dashboard() {
   const { loading: authLoading } = useSelector((state) => state.auth);
@@ -13,7 +13,7 @@ function Dashboard() {
   return (
     <div className=" flex relative min-h-[calc(100vh-2.5rem)] text-richblack-25 ">
       <Sidebar />
-      <div className="min-h-[100vh]  overflow-x-hidden w-full px-40">
+      <div className="min-h-[100vh] overflow-x-hidden ">
         <div className=" mx-auto py-10 ">
           <Outlet />
         </div>

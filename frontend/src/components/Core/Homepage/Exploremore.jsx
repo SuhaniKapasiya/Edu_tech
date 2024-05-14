@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { HomePageExplore } from "../../../data/homepage-emplore";
-import CourseCard from "./CourceCard";
-// import Tesxt from "./HighlightText";
-import Texthighlighter from "./Texthighlighter";
+import { HomePageExplore } from "../../../data/homepage-explore";
+import Highlightedtext from "./Highlightedtext";
+import { AiTwotoneNotification } from "react-icons/ai";
+import { BsFillJournalBookmarkFill } from "react-icons/bs";
 
-const tabsName = [
+const tabsname = [
   "Free",
   "New to coding",
   "Most popular",
@@ -12,65 +12,89 @@ const tabsName = [
   "Career paths",
 ];
 
-const Exploremore = () => {
-  const [currentTab, setcurrentTab] = useState(tabsName[0]);
-  const [courses, setCourses] = useState(HomePageExplore[0].courses);
-  const [currentCard, setCurrentCard] = useState(
-    HomePageExplore[0].courses[0].heading
+function Exploremore() {
+  const [currrtab, setcurrtab] = useState(tabsname[0]);
+  const [courses, setcourses] = useState(HomePageExplore[0].courses);
+  const [currcard, setcurrcard] = useState(
+    HomePageExplore[0].courses[0]
   );
-   console.log(currentCard);
 
-  const setMyCards = (vale) => {
-    setcurrentTab(vale);
-    const result = HomePageExplore.filter((pre) => pre.tag === vale);
-    setCourses(result[0].courses);
-     setCurrentCard(result[0].courses[0].heading);
+  const setcard = (val) => {
+    setcurrtab(val);
+
+    const res = HomePageExplore.filter((courses) => courses.tag === val);
+
+    setcourses(res[0].courses);
+    setcurrcard(res.courses[0]);
   };
-  return (
-    <div>
-      <div>
-        <div className="text-4xl font-semibold text-center my-10">
-          Unlock the
-          <Texthighlighter text={"Power of Code"} />
-          <p className="text-center text-richblack-300 text-lg font-semibold mt-1">
-            Learn to Build Anything You Can Imagine
-          </p>
-        </div>
-      </div>
-      <div className="hidden lg:flex gap-5 -mt-5 mx-auto w-max bg-richblack-800 text-richblack-200 p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]">
-        {tabsName.map((ele, index) => {
-          return (
-            <div
-              className={` text-[16px] flex flex-row items-center gap-2 ${
-                currentTab === ele
-                  ? "bg-richblack-900 text-richblack-5 font-medium"
-                  : "text-richblack-200"
-              } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-richblack-900 hover:text-richblack-5`}
-              key={index}
-              onClick={() => setMyCards(ele)}
-            >
-              {ele}
-            </div>
-          );
-        })}
-      </div>
-      <div className="hidden lg:block lg:h-[200px]"></div>
 
-      {/* Cards Group */}
-      <div className="lg:absolute gap-10 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3">
-        {courses&&courses.map((ele, index) => {
-          return (
-            <CourseCard
-              key={index}
-              cardData={ele}
-              currentCard={currentCard}
-              setCurrentCard={setCurrentCard}
-            />
-          );
-        })}
+  return (
+    <div className=" mx-auto text-center flex flex-col ">
+      <div className="mx-auto  font-semibold text-4xl mb-6">
+        Unlock the <Highlightedtext text={"Power of Code"} />{" "}
+      </div>
+      <div className=" text-center  text-md text-richblack-300  mx-auto font-inter max-w-[1000px]   ">
+        Learn to build anything you can imagin
+      </div>
+      <div className=" flex flex-row mt-4 text-center bg-richblack-500 items-center w-fit justify-center mx-auto p-1 rounded-full  ">
+        {tabsname.map((tab) => (
+          <div
+            onClick={() => setcard(tab)}
+            className={`mx-2 transition-all duration-200 rounded-full px-2 py-1 cursor-pointer   ${
+              currrtab == tab
+                ? " bg-richblack-700 hover:bg-richblack-600  text-white font-medium "
+                : " bg-richblack-500 text-richblack-200 hover:text-richblack-100 "
+            }`}
+          >
+            {tab}
+          </div>
+        ))}
+      </div>
+      <div className="  flex ]  mt-20 text-center  items-center justify-center  ">
+        {courses.map((acourse) => (
+          <div
+            onClick={() => setcurrcard(acourse)}
+            className={` mx-10 flex  flex-col w-[220px] h-[180px]  justify-around   p-4 hover:scale-95 transition-all duration-200 cursor-pointer   ${
+              currcard == acourse ? "   bg-white shadow-richblue-25   " : "  bg-richblack-800  "
+            } `}
+          >
+            <div
+              className={` flex items-start font-semibold ${
+                currcard == acourse ? "  text-black " : " text-richblack-100 "
+              } `}
+            >
+              {acourse.heading}
+            </div>
+            <div
+              className={` flex text-xs text-start  justify-center  items-start  ${
+                currcard == acourse
+                  ? "   text-richblack-600 "
+                  : "  text-richblack-200  "
+              }   `}
+            >
+              {acourse.description}
+            </div>
+            <div
+              className={` flex justify-around mt-7 ${
+                currcard == acourse
+                  ? "   text-blue-200 "
+                  : "  text-richblack-200  "
+              } `}
+            >
+              <div className=" flex text-sm  justify-center items-center mr-2 ">
+                <AiTwotoneNotification />
+                {acourse.level}
+              </div>
+              <div className={` flex justify-center items-center  `}>
+                <BsFillJournalBookmarkFill />
+                {acourse.lessionNumber} Lessons
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
-};
+}
 
 export default Exploremore;

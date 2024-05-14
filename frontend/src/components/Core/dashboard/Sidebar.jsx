@@ -1,12 +1,12 @@
 import React from "react";
-import { sidebarLinks } from "../../../data/dashboard_links";
-import { logout } from "../../../service/operations/authAPI";
+import { sidebarLinks } from "../../../data/dashboard-links";
+import { logout } from "../../../services/operations/authAPI";
 import { useDispatch, useSelector } from "react-redux";
-import Sidebarlinks from "./SidebarLink";
+import Sidebarlinks from "./Sidebarlinks";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Confirmationmodal from "../../ConfirmationModal";
+import Confirmationmodal from "../../Common/Confirmationmodal";
 
 function Sidebar() {
   const dispatch = useDispatch();

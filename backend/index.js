@@ -1,33 +1,32 @@
-const expres = require("express");
-const app = expres();
+const express = require("express");
+const app = express();
 
+// routes import
 const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
-const paymentRouts = require("./routes/Payments");
+const paymentRoutes = require("./routes/Payments");
 const courseRoutes = require("./routes/Course");
+const contactUsRoutes = require("./routes/ContactUs");
 
+// utils import
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { cloudinaryConnect } = require("./config/cloudinary");
-
 const fileUpload = require("express-fileupload");
-
 const dotenv = require("dotenv");
-const { connect } = require("mongoose");
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 //database connect
 database.connect();
-//middlweware
-app.use(expres.json());
+//middlewares
+app.use(express.json());
 app.use(cookieParser());
-
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
   })
 );
@@ -35,24 +34,25 @@ app.use(
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: "/temp",
+    tempFileDir: "/tmp",
   })
 );
-
-//cloudinaryConnection
+//cloudinary connection
 cloudinaryConnect();
 
+//routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
-app.use("/api/v1/payment", paymentRouts);
-
+// http://localhost:4000/api/v1/course/showAllCategories
+app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/reach", contactUsRoutes);
 //def route
 
 app.get("/", (req, res) => {
   return res.json({
     success: true,
-    message: "Your server is up and running",
+    message: "Your server is up and running....",
   });
 });
 

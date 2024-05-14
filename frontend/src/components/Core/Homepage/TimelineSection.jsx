@@ -1,86 +1,104 @@
 import React from "react";
-import TimeLineImage from "../../../assets/Images/TimelineImage.png";
-import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg";
-import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg";
-import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
-import Logo4 from "../../../assets/TimeLineLogo/Logo4.svg";
+import logo1 from "../../../assets/TimeLineLogo/Logo1.svg";
+import logo2 from "../../../assets/TimeLineLogo/Logo2.svg";
+import logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
+import logo4 from "../../../assets/TimeLineLogo/Logo4.svg";
+import timelineimg from "../../../assets/Images/TimelineImage.png";
 
-const TimeLine = [
-  {
-    Logo: Logo1,
-    Heading: "Leadership",
-    Description: "Fully committed to the success company",
-  },
-  {
-    Logo: Logo2,
-    Heading: "Responsibility",
-    Description: "Students will always be our top priority",
-  },
-  {
-    Logo: Logo3,
-    Heading: "Flexibility",
-    Description: "The ability to switch is an important skills",
-  },
-  {
-    Logo: Logo4,
-    Heading: "Solve the problem",
-    Description: "Code your way to a solution",
-  },
-];
-
-const TimelineSection = () => {
+function Timelinesection() {
   return (
-    <div>
-      <div className="flex flex-col lg:flex-row gap-20 mb-20 items-center">
-        <div className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
-          {TimeLine.map((ele, i) => {
-            return (
-              <div className="flex flex-col lg:gap-3" key={i}>
-                <div className="flex gap-6" key={i}>
-                  <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
-                    <img src={ele.Logo} alt="" />
-                  </div>
-                  <div>
-                    <h2 className="font-semibold text-[18px]">{ele.Heading}</h2>
-                    <p className="text-base">{ele.Description}</p>
-                  </div>
-                </div>
-                <div
-                  className={`hidden ${
-                    TimeLine.length - 1 === i ? "hidden" : "lg:block"
-                  }  h-14 border-dotted border-r border-richblack-100 bg-richblack-400/0 w-[26px]`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
-          <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
-            {/* Section 1 */}
-            <div className="flex gap-5 items-center lg:border-r border-caribbeangreen-300 px-7 lg:px-14">
-              <h1 className="text-3xl font-bold w-[75px]">10</h1>
-              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
-                Years experiences
-              </h1>
+    <div className=" flex  mx-24  w-11/12  items-center ">
+      <div className=" flex flex-col w-[45%] ">
+        <div className=" flex items-center my-2 ">
+          <div className=" flex items-center justify-center h-14  w-14 rounded-full bg-white ">
+            <img src={logo1} alt="" />
+          </div>
+          <div className=" flex flex-col ml-4 ">
+            <div className=" font-semibold text-lg font-inter text-richblack-700 ">
+              Leadership
             </div>
-
-            {/* Section 2 */}
-            <div className="flex gap-5 items-center lg:px-14 px-7">
-              <h1 className="text-3xl font-bold w-[75px]">250</h1>
-              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
-                types of courses
-              </h1>
+            <div className=" font-inter text-richblack-600 ">
+              Fully committed to the success company
             </div>
           </div>
-          <img
-            src={TimeLineImage}
-            alt="timelineImage"
-            className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
-          />
+        </div>
+
+        <div className=" border-dashed border-l-2 items-center  h-10 border-richblack-200 ml-6  "></div>
+
+        <div className=" flex items-center my-2 ">
+          <div className=" flex items-center justify-center h-14  w-14 rounded-full bg-white ">
+            <img src={logo2} alt="" />
+          </div>
+          <div className=" flex flex-col ml-4 ">
+            <div className=" text-lg font-inter font-semibold text-richblack-700 ">
+              Responsibility
+            </div>
+            <div className=" font-inter text-richblack-600 ">
+              Students will always be our top priority
+            </div>
+          </div>
+        </div>
+
+        <div className=" border-dashed border-l-2 items-center  h-10 border-richblack-200 ml-6  "></div>
+
+        <div className=" flex items-center my-2 ">
+          <div className=" flex items-center justify-center h-14  w-14 rounded-full bg-white ">
+            <img src={logo3} alt="" />
+          </div>
+          <div className=" flex flex-col ml-4 ">
+            <div className=" text-lg font-inter font-semibold text-richblack-700 ">
+              Flexibility
+            </div>
+            <div className=" font-inter text-richblack-600 ">
+              The ability to switch is an important skills
+            </div>
+          </div>
+        </div>
+
+        <div className=" border-dashed border-l-2 items-center  h-10 border-richblack-200 ml-6  "></div>
+
+        <div className=" flex items-center my-2 ">
+          <div className=" flex items-center justify-center h-14  w-14 rounded-full bg-white ">
+            <img src={logo4} alt="" />
+          </div>
+          <div className=" flex flex-col ml-4 ">
+            <div className=" text-lg font-semibold font-inter text-richblack-700 ">
+              Solve the problem
+            </div>
+            <div className=" font-inter text-richblack-600 ">
+              Code your way to a solution
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className=" p-14 mr-6 relative flex items-center justify-center shadow-blue-200 w-[55%]  ">
+        <img src={timelineimg} className=" w-[600px] shadow-[20px_20px_0px_0px_#fff] " alt="" />
+        {/* green vala box  */}
+        <div className=" bottom-1 absolute bg-caribbeangreen-700 flex text-white uppercase">
+          <div className=" flex items-center p-8 ">
+            <div className=" font-inter text-4xl font-bold ">10</div>
+            <div className=" flex flex-col ml-6 ">
+              <div className=" text-sm text-caribbeangreen-400  ">YEARS</div>
+              <div className=" text-sm text-caribbeangreen-400  ">
+                Experince
+              </div>
+            </div>
+          </div>
+          {/* border line  */}
+          <div className=" w-2 h-10 border-caribbeangreen-400 border-l-2 justify-center items-center flex mt-8 border-solid p-2 "></div>
+          {/* <div></div> right  */}
+          <div className=" flex items-center p-8 ">
+            <div className=" font-inter text-4xl font-bold ">250</div>
+            <div className=" flex flex-col ml-6 ">
+              <div className=" text-sm text-caribbeangreen-400  ">types of</div>
+              <div className=" text-sm text-caribbeangreen-400  ">courses</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default TimelineSection;
+export default Timelinesection;
